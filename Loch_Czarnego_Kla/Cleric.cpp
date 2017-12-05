@@ -34,7 +34,7 @@ Cleric::Cleric():
     willSave=2;
     skillrank+=2;
     attackBonus=0;
-
+    improvedInitiative=true;
 
 
 }

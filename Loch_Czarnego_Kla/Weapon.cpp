@@ -26,6 +26,27 @@ Weapon::Weapon(const std::string &Name, int GP, int SP, int CP, int rangeIncemen
                                                                                                     demageD(demageD),
                                                                                                     critMin(critMin),
                                                                                                     critMultiple(
-                                                                                                            critMultiple) {}
+                                                                                                            critMultiple)
+                                                                                                    ,amunition(0) {}
+
+int Weapon::getRange() const {
+    return rangeIncement;
+}
+
+int Weapon::getCritMin() const {
+    return critMin;
+}
+
+int Weapon::getCritMultiple() const {
+    return critMultiple;
+}
+
+int Weapon::getDemageMultiple() const {
+    return demageMultiple;
+}
+
+int Weapon::getDemageD() const {
+    return demageD;
+}
 
 

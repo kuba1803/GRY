@@ -10,6 +10,7 @@
 #include "Race.h"
 #include "Alignment.h"
 #include "Weapon.h"
+#include "Tests.h"
 class Character {
 public:
     Character(const std::string &name, Race race, Alignment alignment, char gender, int strenght, int Dexterity,
@@ -98,24 +99,22 @@ protected:
     int willSave;
     int skillrank;
     int attackBonus;
+public:
+    int getAttackBonus(Weapon * weapon) const;
+
+    void setAttackBonus(int attackBonus);
+
+protected:
+    bool improvedInitiative;
 
 public:
     virtual int getFortitudeSave()=0;
     virtual int getReflexSave()=0;
     virtual int getWillSave()=0;
-    static int mod(int i){
-        if(i==1)return -5;
-        if(i<=3)return -4;
-        if(i<=5)return -3;
-        if(i<=7)return -2;
-        if(i<=9)return -1;
-        if(i<=11)return 0;
-        if(i<=13)return 1;
-        if(i<=15)return 2;
-        if(i<=17)return 3;
-        if(i<=19)return 4;
-        return 5;
-    }
+    static int mod(int i);
+    int attackPirmWeapon(int rolled);
+    int attackSecondWeapon(int rolled);
+    int getInitiative();
 
 };
 

@@ -60,7 +60,9 @@ Character::Character(const std::string &name, Race race, Alignment alignment, ch
                                                                                                            intelligance),
                                                                                                    wisdom(wisdom),
                                                                                                    charisma(charisma),
-                                                                                                   hitPoint(hitPoint) {
+                                                                                                   hitPoint(hitPoint),
+                                                                                                   improvedInitiative(
+                                                                                                           false){
     if(race==Race::Czlowiek){
         skillrank=1;
     } else {
@@ -90,4 +92,54 @@ int Character::getWisdom() const {
 
 int Character::getCharisma() const {
     return charisma;
+}
+
+
+int Character::attackPirmWeapon(int rolled) {
+    if(rolled>=primWeapon->getCritMin()){
+        int tmp=0;
+        for(int i=0;i<primWeapon->getCritMultiple();i++){
+            tmp+=Tests::roll(primWeapon->getDemageMultiple(),primWeapon->getDemageD());
+        }
+        return tmp;
+    }
+    return Tests::roll(primWeapon->getDemageMultiple(),primWeapon->getDemageD());
+}
+
+int Character::attackSecondWeapon(int rolled) {
+    if(rolled>=secondWeapon->getCritMin()){
+        int tmp=0;
+        for(int i=0;i<secondWeapon->getCritMultiple();i++){
+            tmp+=Tests::roll(secondWeapon->getDemageMultiple(),secondWeapon->getDemageD());
+        }
+        return tmp;
+    }
+    return Tests::roll(secondWeapon->getDemageMultiple(),secondWeapon->getDemageD());
+}
+
+int Character::getInitiative() {
+    return (improvedInitiative?4:0)+Character::mod(getDexterity());
+}
+
+int Character::getAttackBonus(Weapon *weapon=NULL) const {
+    if(weapon==NULL || weapon->getRange()==0)return attackBonus + Character::mod(getStrenght());
+    else return attackBonus+Character::mod(getDexterity());
+}
+
+void Character::setAttackBonus(int attackBonus) {
+    Character::attackBonus = attackBonus;
+}
+
+int Character::mod(int i) {
+    if(i==1)return -5;
+    if(i<=3)return -4;
+    if(i<=5)return -3;
+    if(i<=7)return -2;
+    if(i<=9)return -1;
+    if(i<=11)return 0;
+    if(i<=13)return 1;
+    if(i<=15)return 2;
+    if(i<=17)return 3;
+    if(i<=19)return 4;
+    return 5;
 }

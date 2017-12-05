@@ -17,13 +17,32 @@ public:
 
 private:
     int rangeIncement;
+public:
+    int getRange() const;
+
+private:
     int hands;
     attackType first;
     attackType second;
     int demageMultiple;
+public:
+    int getDemageMultiple() const;
+
+    int getDemageD() const;
+
+private:
     int demageD;
     int critMin;
+public:
+    int getCritMin() const;
+
+private:
     int critMultiple;
+public:
+    int getCritMultiple() const;
+
+private:
+    int amunition;
 
 
 public:
